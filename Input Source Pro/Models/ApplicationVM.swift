@@ -11,7 +11,7 @@ final class ApplicationVM: ObservableObject {
 
     let logger = ISPLogger(category: String(describing: ApplicationVM.self))
 
-    let cancelBag = CancelBag()
+    var cancelBag = CancelBag()
     let preferencesVM: PreferencesVM
 
     lazy var windowAXNotificationPublisher = ApplicationVM
@@ -81,7 +81,7 @@ extension ApplicationVM {
             }
             .removeDuplicates(by: { $0.isSameAppOrWebsite(with: $1, detectAddressBar: true) })
             .sink { [weak self] in self?.appKind = $0 }
-            .store(in: cancelBag)
+            .store(in: &cancelBag)
     }
 }
 
@@ -98,6 +98,6 @@ extension ApplicationVM {
             .filter { [weak self] _ in self?.preferencesVM.preferences.isEnhancedModeEnabled == true }
             .filter { [weak self] in self?.preferencesVM.isHideIndicator($0) != true }
             .sink { $0.getApp().activateAccessibilities() }
-            .store(in: cancelBag)
+            .store(in: &cancelBag)
     }
 }

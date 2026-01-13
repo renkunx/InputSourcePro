@@ -214,3 +214,36 @@
 "Open Input Monitoring Settings" = "打开「输入监控」设置";
 "Open Input Monitoring Settings, click the \"+\" button and add \"Input Source Pro\" to the list." = "打开「输入监控」设置，点击“+”按钮并将“Input Source Pro”添加到列表中。";
 "Disabled until permissions are granted" = "权限授予前将被禁用";
+
+// Keyboard Sound Effects
+"Keyboard Sound" = "键盘音效";
+"Keyboard Sound Effects" = "键盘音效";
+"Enable Keyboard Sounds" = "启用键盘音效";
+"Switch Type" = "轴体类型";
+"Select your mechanical switch type:" = "选择您的机械键盘轴体：";
+"Blue Switch (Clicky)" = "青轴（段落轴）";
+"Red Switch (Linear)" = "红轴（线性轴）";
+"Brown Switch (Tactile)" = "茶轴（段落轴）";
+"Black Switch (Heavy Linear)" = "黑轴（重线性轴）";
+"Clear Switch (Heavy Tactile)" = "静音轴（重段落轴）";
+"Silver Switch (Fast Linear)" = "银轴（快速线性轴）";
+"Loud and clicky" = "响亮且有段落感";
+"Smooth and quiet" = "平滑安静";
+"Tactile feedback" = "段落反馈";
+"Heavy and smooth" = "厚重平滑";
+"Strong tactile bump" = "强段落感";
+"Fast and light" = "快速轻便";
+"Trigger Mode" = "触发模式";
+"Choose when sounds play:" = "选择何时播放音效：";
+"All Keys" = "所有按键";
+"Character Keys Only" = "仅字符键";
+"Exclude Modifiers" = "排除修饰键";
+"Exclude Space Bar" = "排除空格键";
+"Volume" = "音量";
+"Test Sound" = "测试音效";
+"About Keyboard Sounds" = "关于键盘音效";
+"This feature plays mechanical keyboard sound effects when you type. The sounds are played locally and do not affect system audio." = "此功能在您打字时播放机械键盘音效。音效在本地播放，不会影响系统音频。";
+"Input Monitoring permission is required" = "需要输入监控权限";
+"Permission Required" = "需要权限";
+"Keyboard Sound Effects requires Input Monitoring permission to detect keystrokes." = "键盘音效功能需要输入监控权限来检测按键。";
+"Open Input Monitoring Preferences" = "打开输入监控偏好设置";

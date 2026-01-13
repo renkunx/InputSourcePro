@@ -47,7 +47,7 @@ extension NSRunningApplication {
             .receive(on: DispatchQueue.main)
             .flatMapLatest { _ -> AnyPublisher<WatchAXOutput, Never> in
                 AnyPublisher.create { [weak self] observer in
-                    let cancelBag = CancelBag()
+                    var cancelBag = CancelBag()
 
                     self?.activateAccessibilities()
 
@@ -66,7 +66,7 @@ extension NSRunningApplication {
                                 notifications,
                                 runningApplication.bundleIdentifier
                             )
-                            .store(in: cancelBag)
+                            .store(in: &cancelBag)
                         }
 
                         observer.send((runningApplication, event))
@@ -79,7 +79,7 @@ extension NSRunningApplication {
                         notifications,
                         runningApplication.bundleIdentifier
                     )
-                    .store(in: cancelBag)
+                    .store(in: &cancelBag)
 
                     return AnyCancellable {
                         cancelBag.cancel()

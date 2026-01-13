@@ -87,7 +87,7 @@ final class IndicatorVM: ObservableObject {
                         self?.preferencesVM.removeKeyboardCacheFor(bundleId: bundleId)
                     }
             }
-            .store(in: cancelBag)
+            .store(in: &cancelBag)
 
         preferencesVM.$preferences
             .map(\.isRestorePreviouslyUsedInputSource)
@@ -95,7 +95,7 @@ final class IndicatorVM: ObservableObject {
             .sink { [weak self] _ in
                 self?.preferencesVM.clearKeyboardCache()
             }
-            .store(in: cancelBag)
+            .store(in: &cancelBag)
     }
 
     private func watchPunctuationRules() {
@@ -112,7 +112,7 @@ final class IndicatorVM: ObservableObject {
                     self.punctuationService.disable()
                 }
             }
-            .store(in: cancelBag)
+            .store(in: &cancelBag)
     }
 
     private func watchFunctionKeyMode() {
@@ -121,7 +121,7 @@ final class IndicatorVM: ObservableObject {
             .sink { [weak self] appKind in
                 self?.applyFunctionKeyMode(for: appKind)
             }
-            .store(in: cancelBag)
+            .store(in: &cancelBag)
 
         preferencesVM.$preferences
             .map(\.isFunctionKeysEnabled)
@@ -133,7 +133,7 @@ final class IndicatorVM: ObservableObject {
 
                 self.applyFunctionKeyMode(for: appKind)
             }
-            .store(in: cancelBag)
+            .store(in: &cancelBag)
     }
 
     private func applyFunctionKeyMode(for appKind: AppKind) {
@@ -264,11 +264,11 @@ extension IndicatorVM {
         applicationVM.$appKind
             .compactMap { $0 }
             .sink(receiveValue: { [weak self] in self?.send(.appChanged($0)) })
-            .store(in: cancelBag)
+            .store(in: &cancelBag)
 
         inputSourceVM.inputSourceChangesPublisher
             .sink(receiveValue: { [weak self] in self?.send(.inputSourceChanged($0)) })
-            .store(in: cancelBag)
+            .store(in: &cancelBag)
 
         refreshShortcutSubject
             .sink { [weak self] _ in
@@ -276,7 +276,7 @@ extension IndicatorVM {
 
                 self.shortcutTriggerManager.updateBindings(self.shortcutBindings())
             }
-            .store(in: cancelBag)
+            .store(in: &cancelBag)
 
         refreshShortcut()
         send(.start)

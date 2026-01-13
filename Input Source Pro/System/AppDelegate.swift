@@ -14,6 +14,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var feedbackVM: FeedbackVM!
     var indicatorWindowController: IndicatorWindowController!
     var statusItemController: StatusItemController!
+    var keyboardSoundService: KeyboardSoundService!
 
     func applicationDidFinishLaunching(_: Notification) {
         feedbackVM = FeedbackVM()
@@ -23,6 +24,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         applicationVM = ApplicationVM(preferencesVM: preferencesVM)
         inputSourceVM = InputSourceVM(preferencesVM: preferencesVM)
         indicatorVM = IndicatorVM(permissionsVM: permissionsVM, preferencesVM: preferencesVM, applicationVM: applicationVM, inputSourceVM: inputSourceVM)
+        keyboardSoundService = KeyboardSoundService(preferencesVM: preferencesVM)
 
         indicatorWindowController = IndicatorWindowController(
             permissionsVM: permissionsVM,
@@ -41,6 +43,37 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             feedbackVM: feedbackVM,
             inputSourceVM: inputSourceVM
         )
+
+        // Watch for keyboard sound preference changes
+        preferencesVM.$preferences
+            .map { $0.isKeyboardSoundEnabled }
+            .removeDuplicates()
+            .sink { [weak self] isEnabled in
+                if isEnabled {
+                    self?.keyboardSoundService.enable()
+                } else {
+                    self?.keyboardSoundService.disable()
+                }
+            }
+            .store(in: &preferencesVM.cancelBag)
+
+        // Watch for volume and switch type changes
+        preferencesVM.$preferences
+            .map { ($0.isKeyboardSoundEnabled, $0.keyboardSoundVolume, $0.keyboardSoundSwitchType) }
+            .removeDuplicates { $0 == $1 }
+            .sink { [weak self] _ in
+                self?.keyboardSoundService.updateSettings()
+            }
+            .store(in: &preferencesVM.cancelBag)
+
+        // Watch for test sound notifications
+        NotificationCenter.default.publisher(for: .testKeyboardSound)
+            .sink { [weak self] notification in
+                if let switchType = notification.userInfo?["switchType"] as? MechanicalSwitchType {
+                    self?.keyboardSoundService.playSound(switchType: switchType)
+                }
+            }
+            .store(in: &preferencesVM.cancelBag)
         
         LaunchAtLogin.migrateIfNeeded()
         openPreferencesAtFirstLaunch()

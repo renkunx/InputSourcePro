@@ -123,6 +123,6 @@ extension PreferencesVM {
                     print("Boutique migration error: \(error.localizedDescription)")
                 }
             }
-            .store(in: cancelBag)
+            .store(in: &cancelBag)
     }
 }

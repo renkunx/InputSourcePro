@@ -137,6 +137,9 @@ extension NavigationVM.Nav {
         case .keyboardShortcut:
             return "command"
 
+        case .keyboardSound:
+            return "speaker.wave.2"
+
         case .troubleshooting:
             return "ladybug"
         }
@@ -174,6 +177,9 @@ extension NavigationVM.Nav {
 
         case .keyboardShortcut:
             KeyboardsSettingsView()
+
+        case .keyboardSound:
+            KeyboardSoundSettingsView()
 
         case .troubleshooting:
             TroubleshootingSettingsView()

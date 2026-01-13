@@ -9,7 +9,7 @@ final class CancelBag {
 }
 
 extension AnyCancellable {
-    func store(in cancelBag: CancelBag) {
+    func store(in cancelBag: inout CancelBag) {
         cancelBag.subscriptions.insert(self)
     }
 }

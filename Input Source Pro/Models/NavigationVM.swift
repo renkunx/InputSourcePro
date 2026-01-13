@@ -15,6 +15,7 @@ class NavigationVM: ObservableObject {
 
         case inputSourcesColorScheme = "Input Sources Color Scheme"
         case keyboardShortcut = "Hot Keys"
+        case keyboardSound = "Keyboard Sound"
 
         case troubleshooting = "Troubleshooting"
 
@@ -23,7 +24,7 @@ class NavigationVM: ObservableObject {
                 ("general", "", [.general]),
                 ("rule", "Rules", [.appRules, .browserRules]),
                 ("theme", "Indicator", [.position, .appearance]),
-                ("keyboard", "Keyboard", [.inputSourcesColorScheme, .keyboardShortcut]),
+                ("keyboard", "Keyboard", [.inputSourcesColorScheme, .keyboardShortcut, .keyboardSound]),
                 ("others", "Others", [.troubleshooting]),
             ]
         }

@@ -52,7 +52,7 @@ class AppRuleMenuItem: NSMenuItem {
 
         appCustomization?.publisher(for: \.inputSourceId)
             .sink { [weak self] _ in self?.updateState() }
-            .store(in: cancelBag)
+            .store(in: &cancelBag)
     }
 
     func updateState() {

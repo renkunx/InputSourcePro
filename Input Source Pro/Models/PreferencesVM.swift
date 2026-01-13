@@ -55,7 +55,7 @@ final class PreferencesVM: ObservableObject {
             .map(\.isLaunchAtLogin)
             .removeDuplicates()
             .sink { LaunchAtLogin.isEnabled = $0 }
-            .store(in: cancelBag)
+            .store(in: &cancelBag)
 
         if preferences.prevInstalledBuildVersion == 0 {
             for filterApp in filterApps(NSWorkspace.shared.runningApplications) {
@@ -120,7 +120,7 @@ extension PreferencesVM {
         $automaticallyChecksForUpdates
             .dropFirst()
             .sink { [weak self] in self?.updaterController?.updater.automaticallyChecksForUpdates = $0 }
-            .store(in: cancelBag)
+            .store(in: &cancelBag)
 
         updaterController?.updater
             .publisher(for: \.canCheckForUpdates)
@@ -270,6 +270,11 @@ struct Preferences {
 
         static let indicatorSize = "indicatorSize"
         static let indicatorInfo = "indicatorInfo"
+
+        static let keyboardSoundEnabled = "keyboardSoundEnabled"
+        static let keyboardSoundSwitchType = "keyboardSoundSwitchType"
+        static let keyboardSoundTriggerMode = "keyboardSoundTriggerMode"
+        static let keyboardSoundVolume = "keyboardSoundVolume"
     }
 
     fileprivate init() {}
@@ -446,6 +451,20 @@ struct Preferences {
 
     @CodableUserDefault(Preferences.Key.indicatorPositionSpacing)
     var indicatorPositionSpacing = IndicatorPosition.Spacing.s
+
+    // MARK: - Keyboard Sound Effects
+
+    @UserDefault(Preferences.Key.keyboardSoundEnabled)
+    var isKeyboardSoundEnabled = false
+
+    @CodableUserDefault(Preferences.Key.keyboardSoundSwitchType)
+    var keyboardSoundSwitchType = MechanicalSwitchType.none
+
+    @CodableUserDefault(Preferences.Key.keyboardSoundTriggerMode)
+    var keyboardSoundTriggerMode = KeyboardSoundTriggerMode.allKeys
+
+    @UserDefault(Preferences.Key.keyboardSoundVolume)
+    var keyboardSoundVolume: Double = 0.5
 }
 
 extension Preferences {

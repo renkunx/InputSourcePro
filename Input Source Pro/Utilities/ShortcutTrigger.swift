@@ -207,7 +207,7 @@ final class ShortcutTriggerManager {
                 else { return }
                 self.registerSingleModifierShortcuts(self.pendingBindings)
             }
-            .store(in: cancelBag)
+            .store(in: &cancelBag)
     }
 
     func updateBindings(_ bindings: [ShortcutBinding]) {

@@ -212,3 +212,36 @@
 "Open Input Monitoring Settings" = "Open Input Monitoring Settings";
 "Open Input Monitoring Settings, click the \"+\" button and add \"Input Source Pro\" to the list." = "Open Input Monitoring Settings, click the \"+\" button and add \"Input Source Pro\" to the list.";
 "Disabled until permissions are granted" = "Disabled until permissions are granted";
+
+// Keyboard Sound Effects
+"Keyboard Sound" = "Keyboard Sound";
+"Keyboard Sound Effects" = "Keyboard Sound Effects";
+"Enable Keyboard Sounds" = "Enable Keyboard Sounds";
+"Switch Type" = "Switch Type";
+"Select your mechanical switch type:" = "Select your mechanical switch type:";
+"Blue Switch (Clicky)" = "Blue Switch (Clicky)";
+"Red Switch (Linear)" = "Red Switch (Linear)";
+"Brown Switch (Tactile)" = "Brown Switch (Tactile)";
+"Black Switch (Heavy Linear)" = "Black Switch (Heavy Linear)";
+"Clear Switch (Heavy Tactile)" = "Clear Switch (Heavy Tactile)";
+"Silver Switch (Fast Linear)" = "Silver Switch (Fast Linear)";
+"Loud and clicky" = "Loud and clicky";
+"Smooth and quiet" = "Smooth and quiet";
+"Tactile feedback" = "Tactile feedback";
+"Heavy and smooth" = "Heavy and smooth";
+"Strong tactile bump" = "Strong tactile bump";
+"Fast and light" = "Fast and light";
+"Trigger Mode" = "Trigger Mode";
+"Choose when sounds play:" = "Choose when sounds play:";
+"All Keys" = "All Keys";
+"Character Keys Only" = "Character Keys Only";
+"Exclude Modifiers" = "Exclude Modifiers";
+"Exclude Space Bar" = "Exclude Space Bar";
+"Volume" = "Volume";
+"Test Sound" = "Test Sound";
+"About Keyboard Sounds" = "About Keyboard Sounds";
+"This feature plays mechanical keyboard sound effects when you type. The sounds are played locally and do not affect system audio." = "This feature plays mechanical keyboard sound effects when you type. The sounds are played locally and do not affect system audio.";
+"Input Monitoring permission is required" = "Input Monitoring permission is required";
+"Permission Required" = "Permission Required";
+"Keyboard Sound Effects requires Input Monitoring permission to detect keystrokes." = "Keyboard Sound Effects requires Input Monitoring permission to detect keystrokes.";
+"Open Input Monitoring Preferences" = "Open Input Monitoring Preferences";

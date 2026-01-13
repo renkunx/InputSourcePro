@@ -11,7 +11,7 @@ class StatusItemController {
     let feedbackVM: FeedbackVM
     let inputSourceVM: InputSourceVM
 
-    let cancelBag = CancelBag()
+    var cancelBag = CancelBag()
 
     var statusItem: NSStatusItem?
     var hasPreferencesShown = false
@@ -185,7 +185,7 @@ class StatusItemController {
             }
             .switchToLatest()
             .sink {}
-            .store(in: cancelBag)
+            .store(in: &cancelBag)
     }
 
     @objc func displayMenu() {

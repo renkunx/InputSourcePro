@@ -53,7 +53,7 @@ class InputSourceVM: ObservableObject {
                 self?.inputSourceChangesSubject.send($0)
                 self?._isProgrammaticChange = false
             }
-            .store(in: cancelBag)
+            .store(in: &cancelBag)
     }
 
     func select(inputSource: InputSource) {
@@ -68,7 +68,7 @@ class InputSourceVM: ObservableObject {
             .filter { [weak self] _ in self?._isProgrammaticChange == false }
             .map { _ in InputSource.getCurrentInputSource() }
             .sink { [weak self] in self?.inputSourceChangesSubject.send($0) }
-            .store(in: cancelBag)
+            .store(in: &cancelBag)
     }
 
     private func getInputSourceFromMenu() -> InputSource? {

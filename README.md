@@ -110,6 +110,42 @@ Contributions are highly welcome! Whether you have a bug report, a feature sugge
 * **Feature Requests & Questions:** For suggesting new features, asking questions, or general discussion, please use [**GitHub Discussions**](https://github.com/runjuu/InputSourcePro/discussions).
 * **Code of Conduct:** Please note that this project adheres to our [**Code of Conduct**](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code.
 
+## Resources
+
+### 🎹 Mechanical Keyboard Sound Effects (Developer Reference)
+
+> Play mechanical keyboard sounds when typing. This section documents the sound file specifications for contributors who want to add or modify keyboard sound effects.
+
+#### Sound File Specifications
+
+| Property | Requirement |
+|----------|-------------|
+| Format | WAV |
+| Encoding | PCM (AVAudioPlayer compatible) |
+| Sample Rate | 44.1kHz or 48kHz recommended |
+| Channels | Mono or Stereo |
+| Bit Depth | 16-bit |
+| Duration | 50-150ms (short, crisp keypress sound) |
+
+#### Supported Switch Types
+
+| File Name | Switch Type | Description |
+|-----------|-------------|-------------|
+| `keyboard_Blue.wav` | Blue Switch | Loud and clicky |
+| `keyboard_Red.wav` | Red Switch | Smooth and quiet |
+| `keyboard_Brown.wav` | Brown Switch | Tactile feedback |
+| `keyboard_Black.wav` | Black Switch | Heavy and smooth |
+| `keyboard_Clear.wav` | Clear Switch | Strong tactile bump |
+| `keyboard_Silver.wav` | Silver Switch | Fast and light |
+
+#### Playback Characteristics
+- **Debounce Interval**: 20ms minimum between sounds to prevent overlap
+- **Volume Control**: 0.0 ~ 1.0 (default 0.5)
+- **Playback Mode**: Reset position on each keypress
+
+#### File Location
+Sound files must be placed in the Xcode project Bundle resources, ensuring they are included in **Build Phases → Copy Bundle Resources**.
+
 ## Building from Source
 Clone the repository and build it using the latest version of Xcode:
 

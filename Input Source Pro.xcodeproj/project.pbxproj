@@ -165,6 +165,10 @@
 		D5F4A1CA2F0B1234001B2C3D /* InputSourceSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F4A1C92F0B1234001B2C3D /* InputSourceSwitcher.swift */; };
 		D5F73B022A2C1DCD00BBC10A /* InputSourceVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F73B012A2C1DCD00BBC10A /* InputSourceVM.swift */; };
 		D5FC8F552A4134B5002AE1F2 /* IndicatorSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5FC8F542A4134B5002AE1F2 /* IndicatorSize.swift */; };
+		FB6B1EC82F16230E0073C43D /* keyboard_Blue.wav in Resources */ = {isa = PBXBuildFile; fileRef = FB6B1EC72F16230E0073C43D /* keyboard_Blue.wav */; };
+		FB6B1ECA2F1623EC0073C43D /* KeyboardSoundTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6B1EC92F1623EC0073C43D /* KeyboardSoundTypes.swift */; };
+		FB6B1ECC2F1623FE0073C43D /* KeyboardSoundSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6B1ECB2F1623FE0073C43D /* KeyboardSoundSettingsView.swift */; };
+		FB6B1ECE2F16240A0073C43D /* KeyboardSoundService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6B1ECD2F16240A0073C43D /* KeyboardSoundService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -334,6 +338,10 @@
 		D5F6E8D429EC812500DE042B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D5F73B012A2C1DCD00BBC10A /* InputSourceVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputSourceVM.swift; sourceTree = "<group>"; };
 		D5FC8F542A4134B5002AE1F2 /* IndicatorSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorSize.swift; sourceTree = "<group>"; };
+		FB6B1EC72F16230E0073C43D /* keyboard_Blue.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = keyboard_Blue.wav; sourceTree = "<group>"; };
+		FB6B1EC92F1623EC0073C43D /* KeyboardSoundTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardSoundTypes.swift; sourceTree = "<group>"; };
+		FB6B1ECB2F1623FE0073C43D /* KeyboardSoundSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardSoundSettingsView.swift; sourceTree = "<group>"; };
+		FB6B1ECD2F16240A0073C43D /* KeyboardSoundService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardSoundService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -441,6 +449,7 @@
 		4A2A175D280BA7FA00E13249 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				FB6B1ECD2F16240A0073C43D /* KeyboardSoundService.swift */,
 				25C5A6B42E678D86005AB80E /* PunctuationService.swift */,
 				D598C7E228B74B16004747D1 /* Indicator */,
 				D598C7E428B74B48004747D1 /* AppKit */,
@@ -485,6 +494,7 @@
 		4A2A1770280BA7FA00E13249 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				FB6B1EC92F1623EC0073C43D /* KeyboardSoundTypes.swift */,
 				4A2A1773280BA7FA00E13249 /* IndicatorVM.swift */,
 				4AC2614A2870735B0032AAFE /* IndicatorVM+Triggers.swift */,
 				4A2A1774280BA7FA00E13249 /* PreferencesVM.swift */,
@@ -519,6 +529,7 @@
 		4A2A1776280BA7FA00E13249 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				FB6B1ECB2F1623FE0073C43D /* KeyboardSoundSettingsView.swift */,
 				4A2A1778280BA7FA00E13249 /* PreferencesView.swift */,
 				4A2A1779280BA7FA00E13249 /* GeneralSettingsView.swift */,
 				D5CC44932A33F143007FF839 /* TroubleshootingSettingsView.swift */,
@@ -577,6 +588,7 @@
 		4A2AACC9280BABD200CA8124 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FB6B1EC72F16230E0073C43D /* keyboard_Blue.wav */,
 				4A20AD682892993F00620D14 /* Videos */,
 				4A2A1732280BA6A800E13249 /* Assets.xcassets */,
 				4A2AACCA280BAD3700CA8124 /* Info.plist */,
@@ -785,6 +797,7 @@
 				4A2A1736280BA6A800E13249 /* Preview Assets.xcassets in Resources */,
 				4A5BABE72830A720009F42D7 /* Localizable.strings in Resources */,
 				D58168CA28943A5400E84058 /* Indicator-Near-Cursor-Demo-Dark.mp4 in Resources */,
+				FB6B1EC82F16230E0073C43D /* keyboard_Blue.wav in Resources */,
 				D58168CB28943A5400E84058 /* Indicator-Near-Cursor-Demo-Light.mp4 in Resources */,
 				4A2A1733280BA6A800E13249 /* Assets.xcassets in Resources */,
 			);
@@ -895,6 +908,7 @@
 				4A4167322813D9FA00CCC28C /* NSRegularExpression.swift in Sources */,
 				D508B6A32A140289002E272E /* FileManager+Ext.swift in Sources */,
 				4AB1B192281F971B0081D94C /* AccessibilityPermissionRequestView.swift in Sources */,
+				FB6B1ECE2F16240A0073C43D /* KeyboardSoundService.swift in Sources */,
 				4AEEE08428126A4900C883F8 /* BrowserURL.swift in Sources */,
 				4A2A179C280BA7FA00E13249 /* PreferencesView.swift in Sources */,
 				D50821F229FE29C40078ADEC /* EnhancedModeToggle.swift in Sources */,
@@ -931,6 +945,7 @@
 				4A4E035C2DB97534008E5C2F /* PromotionBadge.swift in Sources */,
 				4A09307B285F31E800232089 /* NSToolbarItem+Identifier.swift in Sources */,
 				4A2A1788280BA7FA00E13249 /* NSImage+Extension.swift in Sources */,
+				FB6B1ECC2F1623FE0073C43D /* KeyboardSoundSettingsView.swift in Sources */,
 				4A20AD65289283C600620D14 /* LoopingPlayerNSView.swift in Sources */,
 				D57334262A84B40B00C8438F /* IconMap.swift in Sources */,
 				4A41672A2813A6CB00CCC28C /* BrowserRulesSettingsView.swift in Sources */,
@@ -945,6 +960,7 @@
 				4A093079285EE63D00232089 /* RunningApplicationsPicker.swift in Sources */,
 				4A8E49912F0AF69300424D11 /* FKeyManager.swift in Sources */,
 				D525609929B56843009EB7BA /* ISPTextEditor.swift in Sources */,
+				FB6B1ECA2F1623EC0073C43D /* KeyboardSoundTypes.swift in Sources */,
 				4A4167282813A61F00CCC28C /* BrowserRule.swift in Sources */,
 				4A2A1799280BA7FA00E13249 /* IndicatorVM.swift in Sources */,
 				D56A7CFC28A4D5C0002F356A /* AXSwift+Browser.swift in Sources */,

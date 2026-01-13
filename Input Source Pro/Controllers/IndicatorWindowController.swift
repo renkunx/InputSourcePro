@@ -75,7 +75,7 @@ class IndicatorWindowController: FloatWindowController {
         indicatorVM.screenIsLockedPublisher
             .flatMapLatest { isLocked in isLocked ? Empty().eraseToAnyPublisher() : indicatorPublisher }
             .sink { _ in }
-            .store(in: cancelBag)
+            .store(in: &cancelBag)
     }
 
     @available(*, unavailable)
