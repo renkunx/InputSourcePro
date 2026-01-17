@@ -169,6 +169,7 @@
 		FB6B1ECA2F1623EC0073C43D /* KeyboardSoundTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6B1EC92F1623EC0073C43D /* KeyboardSoundTypes.swift */; };
 		FB6B1ECC2F1623FE0073C43D /* KeyboardSoundSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6B1ECB2F1623FE0073C43D /* KeyboardSoundSettingsView.swift */; };
 		FB6B1ECE2F16240A0073C43D /* KeyboardSoundService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6B1ECD2F16240A0073C43D /* KeyboardSoundService.swift */; };
+		FBBF89662F1B3096007416D7 /* keyboard_iPhone.wav in Resources */ = {isa = PBXBuildFile; fileRef = FBBF89652F1B3096007416D7 /* keyboard_iPhone.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -342,6 +343,7 @@
 		FB6B1EC92F1623EC0073C43D /* KeyboardSoundTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardSoundTypes.swift; sourceTree = "<group>"; };
 		FB6B1ECB2F1623FE0073C43D /* KeyboardSoundSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardSoundSettingsView.swift; sourceTree = "<group>"; };
 		FB6B1ECD2F16240A0073C43D /* KeyboardSoundService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardSoundService.swift; sourceTree = "<group>"; };
+		FBBF89652F1B3096007416D7 /* keyboard_iPhone.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = keyboard_iPhone.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -588,6 +590,7 @@
 		4A2AACC9280BABD200CA8124 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FBBF89652F1B3096007416D7 /* keyboard_iPhone.wav */,
 				FB6B1EC72F16230E0073C43D /* keyboard_Blue.wav */,
 				4A20AD682892993F00620D14 /* Videos */,
 				4A2A1732280BA6A800E13249 /* Assets.xcassets */,
@@ -797,6 +800,7 @@
 				4A2A1736280BA6A800E13249 /* Preview Assets.xcassets in Resources */,
 				4A5BABE72830A720009F42D7 /* Localizable.strings in Resources */,
 				D58168CA28943A5400E84058 /* Indicator-Near-Cursor-Demo-Dark.mp4 in Resources */,
+				FBBF89662F1B3096007416D7 /* keyboard_iPhone.wav in Resources */,
 				FB6B1EC82F16230E0073C43D /* keyboard_Blue.wav in Resources */,
 				D58168CB28943A5400E84058 /* Indicator-Near-Cursor-Demo-Light.mp4 in Resources */,
 				4A2A1733280BA6A800E13249 /* Assets.xcassets in Resources */,
@@ -1122,11 +1126,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Input Source Pro/Resources/Signing.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 600;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Input Source Pro/Preview Content\"";
+				DEVELOPMENT_TEAM = 2787QL27JX;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
@@ -1159,11 +1165,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Input Source Pro/Resources/Signing.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 600;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Input Source Pro/Preview Content\"";
+				DEVELOPMENT_TEAM = 2787QL27JX;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;

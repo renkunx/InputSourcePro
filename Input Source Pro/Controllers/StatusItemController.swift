@@ -16,6 +16,27 @@ class StatusItemController {
     var statusItem: NSStatusItem?
     var hasPreferencesShown = false
 
+    var keyboardSoundMenu: NSMenuItem? {
+        let currentSwitchType = preferencesVM.preferences.keyboardSoundSwitchType ?? .none
+
+        var items: [NSMenuItem] = MechanicalSwitchType.allCases.map { switchType in
+            let menuItem = NSMenuItem(
+                title: switchType.name,
+                action: #selector(selectKeyboardSound(_:)),
+                keyEquivalent: ""
+            )
+            menuItem.tag = MechanicalSwitchType.allCases.firstIndex(of: switchType) ?? 0
+            menuItem.state = (switchType == currentSwitchType) ? .on : .off
+            menuItem.target = self
+            return menuItem
+        }
+
+        return NSMenuItem(
+            title: "Keyboard Sound".i18n(),
+            submenuItems: items
+        )
+    }
+
     var addRuleMenu: NSMenuItem? {
         guard let app = applicationVM.appKind?.getApp() else { return nil }
 
@@ -114,6 +135,7 @@ class StatusItemController {
 
         let items = [
             NSMenuItem(title: "Input Source Pro".i18n(), action: nil, keyEquivalent: ""),
+            keyboardSoundMenu,
             addBrowserRuleMenu ?? addRuleMenu,
             NSMenuItem.separator(),
             changelogMenu,
@@ -224,5 +246,20 @@ class StatusItemController {
         feedbackVM.show()
         navigationVM.selection = .troubleshooting
         openPreferences()
+    }
+
+    @objc func selectKeyboardSound(_ sender: NSMenuItem) {
+        let index = sender.tag
+        guard index >= 0, index < MechanicalSwitchType.allCases.count else { return }
+
+        let selectedType = MechanicalSwitchType.allCases[index]
+
+        // Enable keyboard sound if not already enabled
+        if !preferencesVM.preferences.isKeyboardSoundEnabled {
+            preferencesVM.preferences.isKeyboardSoundEnabled = true
+        }
+
+        // Set the selected switch type
+        preferencesVM.preferences.keyboardSoundSwitchType = selectedType
     }
 }

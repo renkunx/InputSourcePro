@@ -225,6 +225,8 @@
 "Black Switch (Heavy Linear)" = "Black Switch (Heavy Linear)";
 "Clear Switch (Heavy Tactile)" = "Clear Switch (Heavy Tactile)";
 "Silver Switch (Fast Linear)" = "Silver Switch (Fast Linear)";
+"iPhone" = "iPhone";
+"iOS typing sound" = "iOS typing sound";
 "Loud and clicky" = "Loud and clicky";
 "Smooth and quiet" = "Smooth and quiet";
 "Tactile feedback" = "Tactile feedback";
@@ -245,3 +247,4 @@
 "Permission Required" = "Permission Required";
 "Keyboard Sound Effects requires Input Monitoring permission to detect keystrokes." = "Keyboard Sound Effects requires Input Monitoring permission to detect keystrokes.";
 "Open Input Monitoring Preferences" = "Open Input Monitoring Preferences";
+"Keyboard Sound" = "Keyboard Sound";

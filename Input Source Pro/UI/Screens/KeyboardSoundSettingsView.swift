@@ -80,20 +80,22 @@ struct KeyboardSoundSettingsView: View {
                     .font(.subheadline)
                     .foregroundColor(.secondary)
 
-                Picker("Switch Type", selection: $preferencesVM.preferences.keyboardSoundSwitchType) {
+                let columns = [
+                    GridItem(.flexible(), spacing: 12),
+                    GridItem(.flexible(), spacing: 12),
+                    GridItem(.flexible(), spacing: 12)
+                ]
+
+                LazyVGrid(columns: columns, spacing: 12) {
                     ForEach(MechanicalSwitchType.allCases) { type in
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text(type.name)
-                                .font(.body)
-                            Text(type.description)
-                                .font(.caption)
-                                .foregroundColor(.secondary)
+                        SwitchTypeButton(
+                            type: type,
+                            isSelected: preferencesVM.preferences.keyboardSoundSwitchType == type
+                        ) {
+                            preferencesVM.update { $0.keyboardSoundSwitchType = type }
                         }
-                        .tag(type)
                     }
                 }
-                .pickerStyle(.radioGroup)
-                .horizontalRadioGroupLayout()
 
                 // Test Sound Button
                 if let switchType = preferencesVM.preferences.keyboardSoundSwitchType,
@@ -194,4 +196,44 @@ struct KeyboardSoundSettingsView: View {
 
 extension Notification.Name {
     static let testKeyboardSound = Notification.Name("testKeyboardSound")
+}
+
+// MARK: - Switch Type Button
+
+struct SwitchTypeButton: View {
+    let type: MechanicalSwitchType
+    let isSelected: Bool
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            VStack(alignment: .leading, spacing: 4) {
+                HStack(spacing: 6) {
+                    Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
+                        .font(.system(size: 16))
+                        .foregroundColor(isSelected ? .accentColor : .secondary)
+
+                    Text(type.name)
+                        .font(.body)
+                        .foregroundColor(.primary)
+
+                    Spacer()
+                }
+
+                Text(type.description)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .padding(10)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(isSelected ? Color.accentColor.opacity(0.1) : Color(NSColor.controlBackgroundColor))
+            .cornerRadius(8)
+            .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(isSelected ? Color.accentColor : Color.clear, lineWidth: 1.5)
+            )
+        }
+        .buttonStyle(.plain)
+    }
 }

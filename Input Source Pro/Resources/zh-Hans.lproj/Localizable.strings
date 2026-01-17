@@ -227,6 +227,8 @@
 "Black Switch (Heavy Linear)" = "黑轴（重线性轴）";
 "Clear Switch (Heavy Tactile)" = "静音轴（重段落轴）";
 "Silver Switch (Fast Linear)" = "银轴（快速线性轴）";
+"iPhone" = "iPhone";
+"iOS typing sound" = "iOS 打字音效";
 "Loud and clicky" = "响亮且有段落感";
 "Smooth and quiet" = "平滑安静";
 "Tactile feedback" = "段落反馈";
@@ -247,3 +249,4 @@
 "Permission Required" = "需要权限";
 "Keyboard Sound Effects requires Input Monitoring permission to detect keystrokes." = "键盘音效功能需要输入监控权限来检测按键。";
 "Open Input Monitoring Preferences" = "打开输入监控偏好设置";
+"Keyboard Sound" = "键盘音效";

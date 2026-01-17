@@ -10,6 +10,7 @@ enum MechanicalSwitchType: String, CaseIterable, Identifiable, Codable {
     case black = "Black"
     case clear = "Clear"
     case silver = "Silver"
+    case iphone = "iPhone"
 
     var id: Self { self }
 
@@ -22,6 +23,7 @@ enum MechanicalSwitchType: String, CaseIterable, Identifiable, Codable {
         case .black: return "Black Switch (Heavy Linear)".i18n()
         case .clear: return "Clear Switch (Heavy Tactile)".i18n()
         case .silver: return "Silver Switch (Fast Linear)".i18n()
+        case .iphone: return "iPhone".i18n()
         }
     }
 
@@ -34,6 +36,7 @@ enum MechanicalSwitchType: String, CaseIterable, Identifiable, Codable {
         case .black: return "Heavy and smooth".i18n()
         case .clear: return "Strong tactile bump".i18n()
         case .silver: return "Fast and light".i18n()
+        case .iphone: return "iOS typing sound".i18n()
         }
     }
 }

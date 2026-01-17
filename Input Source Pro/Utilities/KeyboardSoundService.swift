@@ -3,6 +3,55 @@ import AVFoundation
 import Combine
 import Carbon
 
+// MARK: - Audio Player Pool
+
+/// Manages a pool of AVAudioPlayer instances for concurrent sound playback
+private class AudioPlayerPool {
+    private var players: [AVAudioPlayer] = []
+    private let soundFileURL: URL
+    private let maxPoolSize: Int
+
+    init(soundFileURL: URL, maxPoolSize: Int = 8) {
+        self.soundFileURL = soundFileURL
+        self.maxPoolSize = maxPoolSize
+    }
+
+    /// Acquires a player from the pool.
+    /// Strategy: reuse idle player → create new (if pool not full) → reuse oldest
+    func acquirePlayer() -> AVAudioPlayer? {
+        // 1. Reuse an idle player
+        if let index = players.firstIndex(where: { !$0.isPlaying }) {
+            let player = players[index]
+            player.currentTime = 0
+            return player
+        }
+
+        // 2. Create new player if pool not full
+        if players.count < maxPoolSize {
+            if let newPlayer = try? AVAudioPlayer(contentsOf: soundFileURL) {
+                newPlayer.prepareToPlay()
+                players.append(newPlayer)
+                return newPlayer
+            }
+        }
+
+        // 3. Pool full, reuse the oldest player
+        if let oldestPlayer = players.first {
+            oldestPlayer.currentTime = 0
+            return oldestPlayer
+        }
+
+        return nil
+    }
+
+    /// Sets volume for all players in the pool
+    func setVolume(_ volume: Float) {
+        players.forEach { $0.volume = volume }
+    }
+}
+
+// MARK: - Keyboard Sound Service
+
 @MainActor
 class KeyboardSoundService: ObservableObject {
     private let logger = ISPLogger(category: String(describing: KeyboardSoundService.self))
@@ -12,13 +61,9 @@ class KeyboardSoundService: ObservableObject {
     private var eventRunLoopSource: CFRunLoopSource?
     private weak var preferencesVM: PreferencesVM?
 
-    // Audio players for different switch types
-    private var audioPlayers: [MechanicalSwitchType: AVAudioPlayer] = [:]
+    // Audio player pools for different switch types
+    private var playerPools: [MechanicalSwitchType: AudioPlayerPool] = [:]
     private var currentVolume: Float = 0.5
-
-    // Debounce/throttle to prevent sound overlap
-    private var lastSoundTime: TimeInterval = 0
-    private let minimumSoundInterval: TimeInterval = 0.02  // 20ms between sounds
 
     // Key code filtering
     private let modifierKeyCodes: Set<UInt16> = [
@@ -75,34 +120,40 @@ class KeyboardSoundService: ObservableObject {
     // MARK: - Audio Management
 
     private func loadSoundFiles() {
-        // Load sound files from bundle for each switch type
+        // Create player pools for each switch type
         for switchType in MechanicalSwitchType.allCases {
-            if let url = Bundle.main.url(forResource: "keyboard_\(switchType.rawValue)", withExtension: "wav") {
-                do {
-                    let player = try AVAudioPlayer(contentsOf: url)
-                    player.prepareToPlay()
-                    audioPlayers[switchType] = player
-                    logger.debug { "Loaded sound for \(switchType.rawValue) switch" }
-                } catch {
-                    logger.debug { "Failed to load sound for \(switchType.rawValue): \(error)" }
+            let resourceName = "keyboard_\(switchType.rawValue)"
+            if let url = Bundle.main.url(forResource: resourceName, withExtension: "wav") {
+                let pool = AudioPlayerPool(soundFileURL: url, maxPoolSize: 8)
+                playerPools[switchType] = pool
+                logger.debug { "Loaded sound pool for \(switchType.rawValue) switch from \(resourceName).wav" }
+
+                // Test if audio can be loaded
+                if let testPlayer = try? AVAudioPlayer(contentsOf: url) {
+                    logger.debug { "Successfully tested audio for \(switchType.rawValue), duration: \(testPlayer.duration)s" }
+                } else {
+                    logger.debug { "WARNING: Failed to create test audio player for \(switchType.rawValue)" }
                 }
             } else {
-                logger.debug { "Sound file not found for \(switchType.rawValue)" }
+                logger.debug { "Sound file not found for \(switchType.rawValue) (looking for \(resourceName).wav)" }
+                logger.debug { "Bundle resources: \(Bundle.main.urls(forResourcesWithExtension: "wav", subdirectory: nil) ?? [])" }
             }
         }
     }
 
     func playSound(switchType: MechanicalSwitchType) {
-        guard let player = audioPlayers[switchType] else { return }
-
-        let currentTime = ProcessInfo.processInfo.systemUptime
-        guard currentTime - lastSoundTime >= minimumSoundInterval else { return }
+        guard let pool = playerPools[switchType] else {
+            logger.debug { "No player pool found for \(switchType.rawValue)" }
+            return
+        }
+        guard let player = pool.acquirePlayer() else {
+            logger.debug { "Failed to acquire player for \(switchType.rawValue)" }
+            return
+        }
 
         player.volume = currentVolume
-        player.currentTime = 0
+        logger.debug { "Playing sound for \(switchType.rawValue) at volume \(currentVolume)" }
         player.play()
-
-        lastSoundTime = currentTime
     }
 
     // MARK: - Event Monitoring
@@ -207,6 +258,9 @@ class KeyboardSoundService: ObservableObject {
         guard let preferencesVM = preferencesVM else { return }
 
         currentVolume = Float(preferencesVM.preferences.keyboardSoundVolume)
+
+        // Update volume for all player pools
+        playerPools.values.forEach { $0.setVolume(currentVolume) }
 
         // Enable/disable based on preference
         if preferencesVM.preferences.isKeyboardSoundEnabled {
